@@ -1,8 +1,7 @@
 <?php
-class Store_model extends CI_Model {
+class store_model extends CI_Model {
   function __construct() {
     parent::__construct();
-    $this->load->database();
   }
 
   //get stores

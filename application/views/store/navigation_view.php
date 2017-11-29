@@ -22,7 +22,7 @@
               <?php
                 foreach ($stores as $store) {
               ?>
-                <li><a href="/stores/customers/<?=$store->store_id?>">Store ID <?=$store->store_id?></a></li>
+                <li><a href="<?php echo base_url();?>stores/customers/<?=$store->store_id?>">Store ID <?=$store->store_id?></a></li>
               <?php
                 }
               ?>

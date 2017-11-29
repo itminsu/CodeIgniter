@@ -13,7 +13,7 @@ function add_customer()
   {
     $("#spinner").removeClass("hidden");
     $.ajax({
-      url: "http://localhost/stores/customer_add",
+      url: "http://localhost/codeigniter/stores/customer_add",
       type: "POST",
       data: $('#form_add').serialize(),
       dataType: "text",
@@ -37,7 +37,7 @@ function add_customer()
 function update_customer(id)
  {
   $.ajax({
-    url: "http://localhost/stores/load_customer_to_edit/"+id,
+    url: "http://localhost/codeigniter/stores/load_customer_to_edit/"+id,
     type: "GET",
     dataType: "JSON",
     success: function(data)
@@ -67,7 +67,7 @@ function save()
     $("#spinner").removeClass("hidden");
     $.ajax({
 
-      url: "http://localhost/stores/customer_update",
+      url: "http://localhost/codeigniter/stores/customer_update",
       type: "POST",
       data: $('#form_update').serialize(),
       dataType: "JSON",
@@ -115,7 +115,7 @@ function delete_customer(id)
 {
   $("#spinner").removeClass("hidden");
   $.ajax({
-    url: "http://localhost/stores/customer_delete/"+id,
+    url: "http://localhost/codeigniter/stores/customer_delete/"+id,
     type:"POST",
     dataType: "JSON",
     success: function(data)
@@ -133,7 +133,7 @@ function delete_customer(id)
 function show_title_list(id)
 {
   $.ajax({
-    url: "http://localhost/stores/get_title_list/"+id,
+    url: "http://localhost/codeigniter/stores/get_title_list/"+id,
     type: "GET",
     dataType: "JSON",
     success: function(data)

@@ -488,7 +488,7 @@ abstract class CI_DB_forge {
 	 *
 	 * @param	string	$table		Table name
 	 * @param	bool	$if_exists	Whether to add an IF EXISTS condition
-	 * @return	mixed	(Returns a platform-specific DROP table string, or TRUE to indicate there's nothing to do)
+	 * @return	string
 	 */
 	protected function _drop_table($table, $if_exists)
 	{
@@ -894,33 +894,21 @@ abstract class CI_DB_forge {
 			return;
 		}
 
-		if ( ! array_key_exists('DEFAULT', $attributes))
+		if (array_key_exists('DEFAULT', $attributes))
 		{
-			return;
+			if ($attributes['DEFAULT'] === NULL)
+			{
+				$field['default'] = empty($this->_null) ? '' : $this->_default.$this->_null;
+
+				// Override the NULL attribute if that's our default
+				$attributes['NULL'] = TRUE;
+				$field['null'] = empty($this->_null) ? '' : ' '.$this->_null;
+			}
+			else
+			{
+				$field['default'] = $this->_default.$this->db->escape($attributes['DEFAULT']);
+			}
 		}
-
-		if ($attributes['DEFAULT'] === NULL)
-		{
-			$field['default'] = empty($this->_null) ? '' : $this->_default.$this->_null;
-
-			// Override the NULL attribute if that's our default
-			$attributes['NULL'] = TRUE;
-			$field['null'] = empty($this->_null) ? '' : ' '.$this->_null;
-			return;
-		}
-
-		// White-list CURRENT_TIMESTAMP & similar (e.g. Oracle has stuff like SYSTIMESTAMP) defaults for date/time fields
-		if (
-			isset($attributes['TYPE'])
-			&& (stripos($attributes['TYPE'],    'time') !== FALSE OR stripos($attributes['TYPE'],    'date') !== FALSE)
-			&& (stripos($attributes['DEFAULT'], 'time') !== FALSE OR stripos($attributes['DEFAULT'], 'date') !== FALSE)
-		)
-		{
-			$field['default'] = $this->_default.$attributes['DEFAULT'];
-			return;
-		}
-
-		$field['default'] = $this->_default.$this->db->escape($attributes['DEFAULT']);
 	}
 
 	// --------------------------------------------------------------------
@@ -991,8 +979,8 @@ abstract class CI_DB_forge {
 	/**
 	 * Process indexes
 	 *
-	 * @param	string	$table	Table name
-	 * @return	string[] list of SQL statements
+	 * @param	string	$table
+	 * @return	string
 	 */
 	protected function _process_indexes($table)
 	{

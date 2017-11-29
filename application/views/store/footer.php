@@ -15,7 +15,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; Minsu Lee</p>
+            <p>Copyright &copy; Minsu Lee CodeIgniter Project</p>
         </div>
     </div>
     <!-- /.row -->
