@@ -5,13 +5,13 @@ class Stores extends CI_Controller {
     parent::__construct();
     $this->load->helper('url');
 		$this->load->database();
-		//$this->load->model('Store_model');
-		//$this->load->model('Customer_model');
+		$this->load->model('Store_model');
+		$this->load->model('Customer_model');
   }
 
 	public function index() {
 		$this->load->view('store/head');
-		//$stores = $this->store_model->get_all_stores();
+		$stores = $this->store_model->get_all_stores();
 		$this->load->view('store/navigation_view');//, array('stores'=>$stores));
 		$this->load->view('store/footer');
 	}

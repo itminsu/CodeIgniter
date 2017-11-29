@@ -15,7 +15,7 @@
 <footer>
     <div class="row">
         <div class="col-lg-12">
-            <p>Copyright &copy; Minsu Lee :: Kinduct Codeigniter Project 2017</p>
+            <p>Copyright &copy; Minsu Lee</p>
         </div>
     </div>
     <!-- /.row -->
