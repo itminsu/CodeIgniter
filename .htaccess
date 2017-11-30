@@ -6,3 +6,4 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ CodeIgniter/index.php/$1 [L]
 </IfModule>
+
